@@ -1,0 +1,124 @@
+## this is the skeleton of all pages on in this app - it defines the basic html tags
+
+<!DOCTYPE html>
+<html>
+    <meta charset="UTF-8">
+    <head>
+
+        <title>Family Oriented Music Organization</title>
+
+        ## add any site-wide scripts or CSS here; for example, jquery:
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+        ## render the static file links with the same name as this template
+        <script src="/django_mako_plus/dmp-common.min.js"></script>
+        <script src="${STATIC_URL}homepage/scripts/bootstrap.min.js"></script>
+
+        <link rel="icon" href="${STATIC_URL}homepage/media/favicon.ico" type="image/x-icon">
+
+        <link rel="stylesheet" type="text/css" href="${STATIC_URL}homepage/styles/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="${STATIC_URL}homepage/styles/base.css">
+        <link rel="stylesheet" type="text/css" href="${STATIC_URL}homepage/styles/index.css">
+        <link rel="stylesheet" type="text/css" href="${STATIC_URL}homepage/styles/custom-styles.css">
+
+        ${ django_mako_plus.links(self) }
+    </head>
+
+    <body>
+
+        <div class="maintenance_area" style="background-color:#f22; text-align:center;">
+            <%block name="maintenance_area">
+            Such Maintenance. Wow
+            </%block>
+        </div>
+
+
+
+
+            <nav class="navbar navbar-default">
+                <div class="container-fluid">
+                     <div class="navbar-header">
+                        <img class="navbar-brand" src="${STATIC_URL}homepage/media/favicon.ico" alt="Icon">
+                     </div>
+                    <ul class="nav navbar-nav">
+                        <%block name="navbar_items">
+                        <li><a href="/homepage/index">Home</a></li>
+                        <li><a href="/homepage/faq/">FAQ</a></li>
+                        <li><a href="/homepage/about">About</a></li>
+                        <li><a href="/homepage/contact">Contact</a></li>
+                        <li><a href="/homepage/terms">Terms</a></li>
+                        </%block>
+
+                        <li class="dropdown">
+                            <a class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Login<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                              <li>Login</li>
+                              <li>Register</li>
+                            </ul>
+                        </li>
+
+                    </ul>
+
+
+
+
+                </div>
+            </nav>
+
+
+
+
+
+
+            <div class="row">
+                <div class="body-header">
+                    <%block name="body_header">
+                        Body Header
+                    </%block>
+                </div>
+            </div>
+
+
+            <div class="row" id="main_columns">
+
+
+                <div class="left_column">
+                    <%block name="left_column">
+                        Left side stuff
+                    </%block>
+                </div>
+
+
+
+
+                <div class="center_column">
+                    <%block name="content">
+                    Site content goes here in sub-templates.
+                     </%block>
+                </div>
+
+
+
+                <div class="right_column">
+                    <%block name="right_column">
+                    Right side stuff
+                    </%block>
+                </div>
+
+
+            </div>
+
+
+
+        <footer>
+            <%
+            import time
+            localtime = time.localtime(time.time())
+            year = localtime.tm_year
+            %>
+
+            Copyright ${ year } &copy; Family Oriented Music Organization
+        </footer>
+
+    </body>
+</html>
