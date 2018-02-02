@@ -20,13 +20,3 @@ class User(AbstractCUser):
         return['Roku Ultimate 2000', 'USB Cable', 'Candy Bar']
 
 
-
-
-# Create your models here.
-# class Question(models.Model):
-#     question_text = models.TextField(blank=True, null=True)
-#     question_text = models.CharField(max_length=200)
-#     pub_date = models.DateTimeField('date published')
-#     duration  = models.IntegerField(null=True)
-#     address = models.TextField(blank=True, null=True)
-#     citystatezip = models.TextField(blank=True, null=True)
