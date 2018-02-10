@@ -10,34 +10,41 @@ import re
 def process_request(request):
 
     # process the form
-    form = myForm(request)
+    form = LoginForm(request)
     if form.is_valid():
         form.commit()
-        return HttpResponseRedirect('/account/')
+        return HttpResponseRedirect('/homepage/index')
 
-    #render the template
+    # render the template
     return request.dmp_render('login.html', {
       'form': form
     })
 
 
-class MyForm(Formless):
+class LoginForm(Formless):
+
+    def __init__(self, request):
+        super().__init__(request)
+        self.user = None
+        self.email = None
+        self.p = None
 
     def init(self):
-        '''Adds the fields for this form'''
+        """Adds the fields for this form"""
         self.fields['email'] = forms.CharField(label='Email Address')
         self.fields['password'] = forms.CharField(label='Password', widget=forms.PasswordInput())
-        self.user = None
 
     def clean(self):
         self.user = authenticate(email=self.cleaned_data.get('email'), password=self.cleaned_data.get('password'))
+
         if self.user is None:
             raise forms.ValidationError('Invalid email or password.')
+
         # return the cleaned data dict, per django spec
         return self.cleaned_data
 
     def commit(self):
-        '''Process the form action'''
+        """Process the form action"""
         login(self.request, self.user)
 
 

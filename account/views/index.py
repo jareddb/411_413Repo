@@ -4,11 +4,18 @@ from datetime import datetime, timezone
 
 @view_function
 def process_request(request):
-    utc_time = datetime.utcnow()
+    if request.user.is_authenticated:
+        loginstatus = request.user.first_name + ' ' + request.user.last_name
+        hidelogin = 'none'
+        hidelogout = 'block'
+    else:
+        loginstatus = 'Login'
+        hidelogin = 'block'
+        hidelogout = 'none'
+
     context = {
-        # sent to index.html:
-        'utc_time': utc_time,
-        # sent to index.html and index.js:
-        jscontext('utc_epoch'): utc_time.timestamp(),
+        'loginstatus': loginstatus,
+        'hidelogin': hidelogin,
+        'hidelogout': hidelogout,
     }
     return request.dmp_render('index.html', context)

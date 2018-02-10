@@ -14,7 +14,7 @@ padding: 10px;
 padding-left: 25px;
 position:absolute;
 height:100%;
-background-color: #79BD9A;
+background-color: #FFF;
 flex: 1 0 auto;
 flex-direction: column;
 }
@@ -27,7 +27,7 @@ height:100%;
 margin-left: 240px;
 margin-right: 240px;
 padding: 10px;
-background-color: #0B486B;
+background-color: #FFF;
 color: #CCCCCC;
 }
 
@@ -39,7 +39,7 @@ position: absolute;
 width: 240px;
 padding: 10px;
 height:100%;
-background-color: #79BD9A;
+background-color: #FFF;
 
 }
 
@@ -52,13 +52,13 @@ footer {
 }
 
 nav {
-    background-color: #0B486B;
+    background-color: #888;
     text-align: center;
     margin:0px;
 }
 
 .body-header {
-    background-color: #3B8686;
+    background-color: #CFF09E;
     text-align: center;
 }
 
@@ -75,7 +75,7 @@ width:100%;
 
 .navbar {
     margin:0;
-    background-color: #CFF09E;
+    background-color: #AAA;
     border: 0px solid;
     border-radius: 0px;
 }

@@ -7,13 +7,13 @@ from formlib import Formless
 @view_function
 def process_request(request):
 
-    #process the form
+    # process the form
     form = TestForm(request)
     if form.is_valid():
         # do the work of the form
         # make the payment
         # create the user
-        return HttpResponseRedirect('/')
+        return HttpResponseRedirect('/homepage/contact')
 
     # render the template
     context = {

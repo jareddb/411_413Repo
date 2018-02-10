@@ -19,4 +19,3 @@ class User(AbstractCUser):
     def get_purchases(self):
         return['Roku Ultimate 2000', 'USB Cable', 'Candy Bar']
 
-
