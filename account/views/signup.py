@@ -14,7 +14,7 @@ def process_request(request):
     form = SignupForm(request)
     if form.is_valid():
         form.commit()
-        return HttpResponseRedirect('/homepage/index')
+        return HttpResponseRedirect('/account/index')
 
     # render the template
     return request.dmp_render('signup.html', {
@@ -59,7 +59,6 @@ class SignupForm(Formless):
     #
 
     def clean_email(self):
-        print("BLABLABLABLABLA")
         print(self.cleaned_data)
         self.email = email = self.cleaned_data['email']
 
