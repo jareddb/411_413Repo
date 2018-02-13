@@ -2,21 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5b4ee499-0675-4972-8e50-09c4250d3a42" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change beforePath="$PROJECT_DIR$/account/models.py" afterPath="$PROJECT_DIR$/account/models.py" />
-      <change beforePath="$PROJECT_DIR$/account/templates/base_app.html" afterPath="$PROJECT_DIR$/account/templates/base_app.html" />
-      <change beforePath="$PROJECT_DIR$/account/templates/formtest.html" afterPath="$PROJECT_DIR$/account/templates/formtest.html" />
-      <change beforePath="$PROJECT_DIR$/account/templates/index.html" afterPath="$PROJECT_DIR$/account/templates/index.html" />
-      <change beforePath="$PROJECT_DIR$/account/templates/login.html" afterPath="$PROJECT_DIR$/account/templates/login.html" />
-      <change beforePath="$PROJECT_DIR$/account/templates/signup.html" afterPath="$PROJECT_DIR$/account/templates/signup.html" />
-      <change beforePath="$PROJECT_DIR$/account/views/formtest.py" afterPath="$PROJECT_DIR$/account/views/formtest.py" />
-      <change beforePath="$PROJECT_DIR$/account/views/index.py" afterPath="$PROJECT_DIR$/account/views/index.py" />
-      <change beforePath="$PROJECT_DIR$/account/views/login.py" afterPath="$PROJECT_DIR$/account/views/login.py" />
-      <change beforePath="$PROJECT_DIR$/account/views/logout.py" afterPath="$PROJECT_DIR$/account/views/logout.py" />
-      <change beforePath="$PROJECT_DIR$/account/views/signup.py" afterPath="$PROJECT_DIR$/account/views/signup.py" />
-      <change beforePath="$PROJECT_DIR$/homepage/styles/custom-styles.css" afterPath="$PROJECT_DIR$/homepage/styles/custom-styles.css" />
-      <change beforePath="$PROJECT_DIR$/homepage/templates/base.htm" afterPath="$PROJECT_DIR$/homepage/templates/base.htm" />
-      <change beforePath="$PROJECT_DIR$/homepage/views/index.py" afterPath="$PROJECT_DIR$/homepage/views/index.py" />
+      <change beforePath="$PROJECT_DIR$/mygit.log" afterPath="" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
@@ -205,7 +191,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="1">
     <option name="x" value="-7" />
     <option name="width" value="1605" />
     <option name="height" value="1047" />
@@ -370,7 +356,7 @@
     </history-entry>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="1605" height="1047" extended-state="0" />
+    <frame x="-7" y="0" width="1605" height="1047" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.1212508" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
