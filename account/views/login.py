@@ -13,7 +13,7 @@ def process_request(request):
     form = LoginForm(request)
     if form.is_valid():
         form.commit()
-        return HttpResponseRedirect('/homepage/index')
+        return HttpResponseRedirect('/account/index')
 
     # render the template
     return request.dmp_render('login.html', {
