@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'formlib',
     'manager',
     'catalog',
+    'polymorphic',
+    'django.contrib.contenttypes',
 ]
 
 AUTH_USER_MODEL = 'account.User'
