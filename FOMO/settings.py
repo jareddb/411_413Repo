@@ -46,7 +46,6 @@ INSTALLED_APPS = [
     'manager',
     'catalog',
     'polymorphic',
-    'django.contrib.contenttypes',
 ]
 
 AUTH_USER_MODEL = 'account.User'

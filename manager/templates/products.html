@@ -3,7 +3,7 @@
 <%block name="content">
 <p>Catalog Product List Page</p>
 
-
+<table>
 <th>Category</th>
 <th>Type</th>
 <th>Name</th>
@@ -11,16 +11,19 @@
 <th>Quantity</th>
 <th>Actions</th>
 %for p in products:
+    <!--${ dir(p) }-->
     <tr>
-        <td>${ p.Category() }</td>
-        <td>${ p.TYPE_CHOICES }</td>
+        <td>${ p.category.name }</td>
+        <td>${ p.polymorphic_ctype.name }</td>
         <td>${ p.name }</td>
         <td>${ p.price }</td>
         <td>${ p.get_quantity() }</td>
         <td><a href="/manager/edit/${ p.id }">Edit</a> |
-            <a>Delete</a></td> # HOW DO I MAKE THIS DELETE THE RECORD AND RELOAD THE PAGE???
+            <a href="/manager/delete/${ p.id }">Delete</a></td>
     </tr>
+%endfor
+</table>
 <br>
-<a href="/manager/productCreateEdit" role="button" class="btn btn-primary">Create Product</a>
+<a href="/manager/edit" role="button" class="btn btn-primary">Create Product</a>
 </%block>
 

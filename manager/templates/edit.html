@@ -1,7 +1,56 @@
 <%inherit file="base_app.html" />
 
 <%block name="content">
-<p>Catalog Create Edit Page</p>
-
+<p>CATALOG CREATE EDIT PAGE</p>
+<script>
+    function showFields(animate){
+        var type=$("#id_TYPE_CHOICES").val();
+        if (type === "BulkProduct"){
+            if (animate){
+                $("#id_quantity").parent().slideDown();
+                $("#id_max_rental_days").parent().slideUp();
+                $("#id_retire_date").parent().slideUp();
+            }
+            else{
+                $("#id_quantity").parent().show();
+                $("#id_max_rental_days").parent().hide();
+                $("#id_retire_date").parent().hide();
+            }
+        }
+        else if (type === "IndividualProduct"){
+            if (animate){
+                $("#id_quantity").parent().slideUp();
+                $("#id_max_rental_days").parent().slideUp();
+                $("#id_retire_date").parent().slideUp();
+            }
+            else{
+                $("#id_quantity").parent().hide();
+                $("#id_max_rental_days").parent().hide();
+                $("#id_retire_date").parent().hide();
+            }
+        }
+        else{
+            if (animate){
+                $("#id_quantity").parent().slideUp();
+                $("#id_max_rental_days").parent().slideDown();
+                $("#id_retire_date").parent().slideDown();
+            }
+            else{
+                $("#id_quantity").parent().hide();
+                $("#id_max_rental_days").parent().show();
+                $("#id_retire_date").parent().show();
+            }
+        }
+    }
+    $(document).ready(function(){
+        showFields(false)
+    });
+</script>
+    <form action="/manager/edit" method="POST">
+        ${ csrf_input }
+        ${ form.as_p() }
+        <input type="submit" value="submit" />
+    </form>
 
 </%block>
+

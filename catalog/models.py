@@ -2,7 +2,6 @@ from django.db import models
 from polymorphic.models import PolymorphicModel
 
 
-
 class Category(models.Model):
     name = models.TextField(primary_key=True)
     create_date = models.DateTimeField(auto_now_add=True)
