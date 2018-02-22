@@ -46,7 +46,8 @@
         showFields(false)
     });
 </script>
-    <form action="/manager/edit" method="POST">
+
+    <form action="/manager/edit/" method="POST">
         ${ csrf_input }
         ${ form.as_p() }
         <input type="submit" value="submit" />
