@@ -47,17 +47,6 @@ class EditForm(Formless):
         self.fields['name'] = forms.CharField(label='Name', initial=self.product.name, required=True)
         self.fields['status'] = forms.ChoiceField(choices=self.product.STATUS_CHOICES, initial=self.product.status, required=True)
 
-        #
-
-        # type = None
-        # if self.product.TITLE == 'Bulk':
-        #     type = 'BulkProduct'
-        # elif self.product.TITLE == 'Individual':
-        #     type = 'IndividualProduct'
-        # else:
-        #     type = 'RentalProduct'
-
-         #
         self.fields['id'] = forms.IntegerField(label=None, initial=self.product.id, required=False, widget=forms.HiddenInput())
 
         if self.new:
@@ -66,9 +55,6 @@ class EditForm(Formless):
         else:
             self.fields['type'] = forms.ChoiceField(choices=cmod.Product.TYPE_CHOICES, label='Type: '+self.product.TITLE + ' Product', required=False, initial=self.product.TITLE + 'Product', widget = forms.Select(attrs={'onchange': "showFields(true);", 'style': "display:none;"}))
             self.fields['new'] = forms.CharField(label=None, initial='False', required=False, widget=forms.HiddenInput())
-
-        print('NEWNEWNEWNEWNEW11111')
-        print(self.new)
 
         #
 
