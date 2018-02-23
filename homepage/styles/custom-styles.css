@@ -100,12 +100,13 @@ a:hover {
 color: #000;
 }
 
-td {
-margin:5px;
+td, th {
+padding:10px;
+border: 1px solid grey;
 }
 
 th {
-margin:5px;
+height:75px;
 }
 
 table {

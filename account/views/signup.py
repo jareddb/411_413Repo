@@ -65,6 +65,7 @@ class SignupForm(Formless):
         if amod.User.objects.filter(email=email).exists():
             raise forms.ValidationError('Email already exists in the database')
         return self.cleaned_data
+
     #
 
     def clean_password(self):

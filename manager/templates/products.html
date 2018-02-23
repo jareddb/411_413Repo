@@ -14,7 +14,7 @@
     <!--${ dir(p) }-->
     <tr>
         <td>${ p.category.name }</td>
-        <td>${ p.polymorphic_ctype.name }</td>
+        <td>${ p.__class__.__name__ }</td>
         <td>${ p.name }</td>
         <td>${ p.price }</td>
         <td>${ p.get_quantity() }</td>

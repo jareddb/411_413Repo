@@ -1,10 +1,11 @@
 <%inherit file="/homepage/templates/base.htm" />
 
 <%block name="navbar_items">
-    <li class="nav-item ${ 'active' if request.dmp_router_page == 'index' else '' } "><a class="nav-link" href="/">Home</a></li>
-    <li class="nav-item ${ 'active' if request.dmp_router_page == 'faq' else '' }"><a class="nav-link" href="/faq">FAQ</a></li>
-    <li class="nav-item ${ 'active' if request.dmp_router_page == 'about' else '' }"><a class="nav-link" href="/about">About</a></li>
-    <li class="nav-item ${ 'active' if request.dmp_router_page == 'contact' else '' }"><a class="nav-link" href="/contact">Contact</a></li>
-    <li class="nav-item ${ 'active' if request.dmp_router_page == 'terms' else '' }"><a class="nav-link" href="/terms">Terms</a></li>
+    <li class="nav-item ${ 'active' if request.dmp_router_page == 'index' else '' } "><a class="nav-link" href="/homepage/index">Home</a></li>
+    <li class="nav-item ${ 'active' if request.dmp_router_page == 'faq' else '' }"><a class="nav-link" href="/homepage/faq">FAQ</a></li>
+    <li class="nav-item ${ 'active' if request.dmp_router_page == 'about' else '' }"><a class="nav-link" href="/homepage/about">About</a></li>
+    <li class="nav-item ${ 'active' if request.dmp_router_page == 'contact' else '' }"><a class="nav-link" href="/homepage/contact">Contact</a></li>
+    <li class="nav-item ${ 'active' if request.dmp_router_page == 'terms' else '' }"><a class="nav-link" href="homepage/terms">Terms</a></li>
+<li class="nav-item ${ 'active' if request.dmp_router_page == 'Products' else '' }"><a class="nav-link" href="/manager/products">Products</a></li>
 </%block>
 

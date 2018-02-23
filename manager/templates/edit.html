@@ -2,9 +2,19 @@
 
 <%block name="content">
 <p>CATALOG CREATE EDIT PAGE</p>
+<style>
+
+input {
+width:100%;
+padding-top:5px;
+padding-bottom:5px;
+border: 2px solid grey;
+}
+
+</style>
 <script>
     function showFields(animate){
-        var type=$("#id_TYPE_CHOICES").val();
+        var type=$("#id_type").val();
         if (type === "BulkProduct"){
             if (animate){
                 $("#id_quantity").parent().slideDown();
@@ -47,7 +57,7 @@
     });
 </script>
 
-    <form action="/manager/edit/" method="POST">
+    <form action="/manager/edit/submit" method="POST">
         ${ csrf_input }
         ${ form.as_p() }
         <input type="submit" value="submit" />

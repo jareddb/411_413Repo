@@ -13,14 +13,18 @@ import re
 def process_request(request):
     try:
         product = cmod.Product.objects.get(id=request.urlparams[0])
+        new = False
     except:
-        product = cmod.Product(name='', status='A', description='', category=cmod.Category(name='Brass'), price=0)
+        product = cmod.BulkProduct(name='', status='A', description='', category=cmod.Category(name='Brass'), price=0)
+        product.TITLE = 'Bulk'
+        new = True
+
+    if request.urlparams[0] == 'submit':
+        new = False
 
     # process the form
-    form = EditForm(request, product)
-    print('I FINISHED RENDERING THE FORM')
+    form = EditForm(request, product, new)
     if form.is_valid():
-        print('THE FORM IS VALID')
         form.commit(product)
         return HttpResponseRedirect('/manager/products')
 
@@ -32,8 +36,9 @@ def process_request(request):
 
 class EditForm(Formless):
 
-    def __init__(self, request, product):
+    def __init__(self, request, product, new):
         self.product = product
+        self.new = new
         super().__init__(request)
 
     #
@@ -41,10 +46,33 @@ class EditForm(Formless):
     def init(self):
         self.fields['name'] = forms.CharField(label='Name', initial=self.product.name, required=True)
         self.fields['status'] = forms.ChoiceField(choices=self.product.STATUS_CHOICES, initial=self.product.status, required=True)
-        if self.product.name == '':
-            self.fields['TYPE_CHOICES'] = forms.ChoiceField(choices=self.product.TYPE_CHOICES, required=True, widget = forms.Select(attrs={'onchange': "showFields(true);",}))
+
+        #
+
+        # type = None
+        # if self.product.TITLE == 'Bulk':
+        #     type = 'BulkProduct'
+        # elif self.product.TITLE == 'Individual':
+        #     type = 'IndividualProduct'
+        # else:
+        #     type = 'RentalProduct'
+
+         #
+        self.fields['id'] = forms.IntegerField(label=None, initial=self.product.id, required=False, widget=forms.HiddenInput())
+
+        if self.new:
+            self.fields['type'] = forms.ChoiceField(choices=cmod.Product.TYPE_CHOICES, required=False, initial=self.product.TYPE_CHOICES, widget = forms.Select(attrs={'onchange': "showFields(true);"}))
+            self.fields['new'] = forms.CharField(label=None, initial='True', required=False, widget=forms.HiddenInput())
+        else:
+            self.fields['type'] = forms.ChoiceField(choices=cmod.Product.TYPE_CHOICES, label='Type: '+self.product.TITLE + ' Product', required=False, initial=self.product.TITLE + 'Product', widget = forms.Select(attrs={'onchange': "showFields(true);", 'style': "display:none;"}))
+            self.fields['new'] = forms.CharField(label=None, initial='False', required=False, widget=forms.HiddenInput())
+
+        print('NEWNEWNEWNEWNEW11111')
+        print(self.new)
+
+        #
+
         self.fields['description'] = forms.CharField(label='Description', initial=self.product.description, required=True)
-        # self.fields['category'] = forms.ChoiceField(choices=[[x.name, x.name] for x in cmod.Category.objects.all()], initial=self.product.category.name, required=True)
         self.fields['category'] = forms.ModelChoiceField(queryset=cmod.Category.objects.all(), initial=self.product.category.name)
         self.fields['price'] = forms.DecimalField(label='Price', decimal_places=2, initial=self.product.price, required=True)
 
@@ -74,6 +102,39 @@ class EditForm(Formless):
     def clean(self):
         print('I STARTED CLEANING')
         # return the cleaned data dict, per django spec
+
+        type_choice = self.cleaned_data.get('type')
+
+        if type_choice == 'BulkProduct':
+            if self.cleaned_data['quantity'] is None:
+                raise forms.ValidationError('Please enter a quantity')
+
+        if type_choice == 'RentalProduct':
+            if self.cleaned_data['max_rental_days'] is None:
+                raise forms.ValidationError('Please enter a Maximum Rental Period in Days')
+            if self.cleaned_data['retire_date'] is None:
+                raise forms.ValidationError('Please enter a Retire Date for the instrument')
+
+        p1 = self.cleaned_data['price']
+        if type(p1) is str:
+            raise forms.ValidationError('Price must be a number')
+        if p1 < 0:
+            raise forms.ValidationError('Price cannot be less than 0')
+
+        if self.cleaned_data['quantity'] is not None:
+            p1 = self.cleaned_data['quantity']
+            if type(p1) is not int:
+                raise forms.ValidationError('Quantity must be an integer')
+            if p1 < 0:
+                raise forms.ValidationError('Quantity cannot be less than 0')
+
+        if self.cleaned_data['max_rental_days'] is not None:
+            p1 = self.cleaned_data['max_rental_days']
+            if type(p1) is not int:
+                raise forms.ValidationError('Max Rental Period in Days must be an integer')
+            if p1 < 0:
+                raise forms.ValidationError('Max Rental Period in Days cannot be less than 0')
+
         return self.cleaned_data
 
     #
@@ -81,26 +142,27 @@ class EditForm(Formless):
     def commit(self, product):
         """Process the form action"""
 
-        self.product.name = self.cleaned_data.get('name')
-        self.product.status = self.cleaned_data.get('status')
-        type_choice = self.cleaned_data.get('TYPE_CHOICES')
-        print('TYPE CHOICESSSSSSSSSSSSS')
-        print(type_choice)
-        self.product.description = self.cleaned_data.get('description')
-        self.product.category = self.cleaned_data.get('category')
-        self.product.price = self.cleaned_data.get('price')
-
-        print('LOOK AT MEEEEEEEEEEEE')
-        print(self.product.TYPE_CHOICES)
+        type_choice = self.cleaned_data.get('type')
+        if self.new:
+            if type_choice == 'BulkProduct':
+                saveProduct = cmod.BulkProduct()
+            elif type_choice == 'RentalProduct':
+                saveProduct = cmod.RentalProduct()
+            else:
+                saveProduct = cmod.IndividualProduct()
+        else:
+            saveProduct = cmod.Product.objects.get(id=self.cleaned_data.get('id'))
 
         if type_choice == 'BulkProduct':
-            self.product.quantity = self.cleaned_data.get('quantity')
-            self.product.polymorphic_ctype.model = type_choice
-
+            saveProduct.quantity = self.cleaned_data.get('quantity')
         if type_choice == 'RentalProduct':
-            self.product.max_rental_days = self.cleaned_data.get('max_rental_days')
-            self.product.retire_date = self.cleaned_data.get('retire_date')
-            self.product.polymorphic_ctype.model = type_choice
+            saveProduct.max_rental_days = self.cleaned_data.get('max_rental_days')
+            saveProduct.retire_date = self.cleaned_data.get('retire_date')
 
-        self.product.save()
+        saveProduct.name = self.cleaned_data.get('name')
+        saveProduct.status = self.cleaned_data.get('status')
+        saveProduct.description = self.cleaned_data.get('description')
+        saveProduct.category = self.cleaned_data.get('category')
+        saveProduct.price = self.cleaned_data.get('price')
+        saveProduct.save()
 
